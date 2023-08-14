@@ -4,6 +4,7 @@
 
 ### Nuevas Características
 - Implementacion del splash screen.
+- Implementacion del main activity.
 
 ## Fecha 13/08/23
 
