@@ -6,20 +6,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import com.maurodev.chronometer.ui.principal.PrincipalActivity
-import com.maurodev.chronometer.databinding.ActivitySplashScreenBinding
+import com.maurodev.chronometer.R
+import com.maurodev.chronometer.ui.principal.MainActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {
 
-    private lateinit var _binding: ActivitySplashScreenBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivitySplashScreenBinding.inflate(layoutInflater)
-        setContentView(_binding.root)
+        setContentView(R.layout.activity_splash_screen)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, PrincipalActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }, 3000)

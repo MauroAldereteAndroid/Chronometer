@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.principal.PrincipalActivity"
+            android:name=".ui.principal.MainActivity"
             android:exported="false">
         </activity>
     </application>
