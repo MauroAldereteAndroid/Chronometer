@@ -1,6 +1,9 @@
 # CHANGELOG
 
 ## Fecha XX/XX/XX
+- Cambio de iconos de buttons de acuerdo su status.
+
+## Fecha 16/08/23
 
 ### Nuevas Características
 - Implementacion del splash screen.
