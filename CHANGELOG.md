@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Fecha XX/XX/XX
+## Fecha 19/08/23
 - Se implemento la logica del cronometro.
 
 ## Fecha 16/08/23
