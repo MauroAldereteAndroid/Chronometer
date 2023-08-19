@@ -16,10 +16,18 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
+        /**
+         * This screen is shown during the added time.
+         * Once the time is over, you are redirected to the activity declared in the intent.
+         */
         Handler(Looper.getMainLooper()).postDelayed({
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
-        }, 3000)
+        }, TIME_SHOW)
+    }
+
+    companion object {
+        private const val TIME_SHOW = 3000L
     }
 }

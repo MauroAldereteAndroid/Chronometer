@@ -1,6 +1,9 @@
 # CHANGELOG
 
 ## Fecha XX/XX/XX
+- Se implemento la logica del cronometro.
+
+## Fecha 16/08/23
 - Cambio de iconos de buttons de acuerdo su status.
 
 ## Fecha 16/08/23

@@ -11,10 +11,10 @@ class RecyclerViewAdapter(private val listTimes: MutableList<String>) :
     RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textViewCicle: TextView
+        val textViewCircle: TextView
 
         init {
-            textViewCicle = view.findViewById(R.id.tv_item_recycler_view)
+            textViewCircle = view.findViewById(R.id.tv_item_recycler_view)
         }
     }
 
@@ -27,6 +27,6 @@ class RecyclerViewAdapter(private val listTimes: MutableList<String>) :
 
     override fun getItemCount() = listTimes.size
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textViewCicle.text = listTimes[position]
+        holder.textViewCircle.text = listTimes[position]
     }
 }
