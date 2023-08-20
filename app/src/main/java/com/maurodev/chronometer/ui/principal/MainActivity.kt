@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(_binding.root)
 
         _vm = ViewModelProvider(this)[MainViewModel::class.java]
-        setupRecyclerView(_binding.root.context)
+
         behaviorButtons()
         observers()
     }
@@ -45,12 +45,21 @@ class MainActivity : AppCompatActivity() {
             time = it
             _binding.tvCurrentTime.text = StringUtils.formatTime(it)
         }
+
+        _vm.newLoops.observe(this) {
+            setupRecyclerView(_binding.root.context, it)
+        }
+
     }
 
-    private fun setupRecyclerView(context: Context) {
-        val adapter = RecyclerViewAdapter(mutableListOf())
+    private fun setupRecyclerView(context: Context, loopList: MutableList<String>) {
+        val adapter = RecyclerViewAdapter(loopList)
         _binding.rvTimeCicles.layoutManager = LinearLayoutManager(context)
         _binding.rvTimeCicles.adapter = adapter
+
+        // Keeps focus on the latest added value
+        val lastItemPosition = adapter.itemCount - 1
+        _binding.rvTimeCicles.scrollToPosition(lastItemPosition)
     }
 
     /**

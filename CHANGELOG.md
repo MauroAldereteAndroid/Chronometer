@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Fecha XX/XX/XX
+
+### Agregado
+- Implementacion del RV que registra los loops.
+
 ## Fecha 19/08/23
 
 ### Agregado

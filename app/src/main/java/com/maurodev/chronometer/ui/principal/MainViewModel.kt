@@ -1,6 +1,5 @@
 package com.maurodev.chronometer.ui.principal
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,6 +14,7 @@ class MainViewModel : ViewModel(), ChronometerBehaviorInterface {
     var flagButtonPlay = MutableLiveData<Boolean>()
     var flagButtonPause = MutableLiveData<Boolean>()
     var currentTimeLong = MutableLiveData<Long>()
+    val newLoops = MutableLiveData<MutableList<String>>()
 
     private var flagChronometerValue = false
     private var time = TIME_ZERO
@@ -49,7 +49,8 @@ class MainViewModel : ViewModel(), ChronometerBehaviorInterface {
                 flagChronometerValue = true
                 chronometerTimer(time)
             }
-            Log.i("LOOP", StringUtils.formatTime(time))
+            loops.add(StringUtils.formatTime(time))
+            newLoops.postValue(loops)
         }
     }
 
@@ -95,5 +96,6 @@ class MainViewModel : ViewModel(), ChronometerBehaviorInterface {
     companion object {
         private const val TIME_ZERO = 0L
         private const val LAPSE_TIME = 25L
+        val loops = mutableListOf<String>()
     }
 }

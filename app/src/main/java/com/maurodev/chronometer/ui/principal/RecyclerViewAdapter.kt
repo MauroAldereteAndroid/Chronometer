@@ -26,7 +26,10 @@ class RecyclerViewAdapter(private val listTimes: MutableList<String>) :
     }
 
     override fun getItemCount() = listTimes.size
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textViewCircle.text = listTimes[position]
+        var positionLoop = (position + 1).toString()
+        holder.textViewCircle.text = "$positionLoop. " +listTimes[position]
+
     }
 }
