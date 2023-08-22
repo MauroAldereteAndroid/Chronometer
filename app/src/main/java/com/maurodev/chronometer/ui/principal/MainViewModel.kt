@@ -14,6 +14,7 @@ class MainViewModel : ViewModel(), ChronometerBehaviorInterface {
     var flagButtonPlay = MutableLiveData<Boolean>()
     var flagButtonPause = MutableLiveData<Boolean>()
     var currentTimeLong = MutableLiveData<Long>()
+    private var flagButtonStop = false
     val newLoops = MutableLiveData<MutableList<String>>()
 
     private var flagChronometerValue = false
@@ -23,6 +24,7 @@ class MainViewModel : ViewModel(), ChronometerBehaviorInterface {
         viewModelScope.launch(Dispatchers.IO) {
             if (!flagChronometerValue) {
                 flagChronometerValue = true
+                flagButtonStop = false
                 time = TIME_ZERO
                 chronometerTimer()
             }
@@ -32,6 +34,7 @@ class MainViewModel : ViewModel(), ChronometerBehaviorInterface {
     override fun stopChronometer() {
         viewModelScope.launch(Dispatchers.IO) {
             flagChronometerValue = false
+            flagButtonStop = true
             chronometerTimer()
         }
     }
@@ -39,6 +42,7 @@ class MainViewModel : ViewModel(), ChronometerBehaviorInterface {
     override fun pauseChronometer() {
         viewModelScope.launch(Dispatchers.IO) {
             flagChronometerValue = false
+            flagButtonStop = false
             chronometerTimer()
         }
     }
@@ -47,6 +51,7 @@ class MainViewModel : ViewModel(), ChronometerBehaviorInterface {
         viewModelScope.launch(Dispatchers.IO) {
             if (!flagChronometerValue) {
                 flagChronometerValue = true
+                flagButtonStop = false
                 chronometerTimer(time)
             }
             loops.add(StringUtils.formatTime(time))
@@ -68,13 +73,18 @@ class MainViewModel : ViewModel(), ChronometerBehaviorInterface {
                     delay(LAPSE_TIME)
                     time += LAPSE_TIME
                     currentTimeLong.postValue(time)
+                    if (!flagButtonStop) {
+                        currentTimeLong.postValue(time)
+                    } else {
+                        currentTimeLong.postValue(TIME_ZERO)
+                        time = TIME_ZERO
+                    }
                 }
             }
         } ?: withContext(Dispatchers.IO) {
             while (flagChronometerValue) {
                 delay(LAPSE_TIME)
                 time += LAPSE_TIME
-                currentTimeLong.postValue(time)
             }
         }
     }
