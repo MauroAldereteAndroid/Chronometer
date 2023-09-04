@@ -29,7 +29,7 @@ class RecyclerViewAdapter(private val listTimes: MutableList<String>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var positionLoop = (position + 1).toString()
-        holder.textViewCircle.text = "$positionLoop. " +listTimes[position]
+        holder.textViewCircle.text = "$positionLoop. " + listTimes[position]
 
     }
 }

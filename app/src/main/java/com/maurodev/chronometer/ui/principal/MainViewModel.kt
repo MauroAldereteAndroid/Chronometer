@@ -3,6 +3,8 @@ package com.maurodev.chronometer.ui.principal
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.maurodev.chronometer.utils.BUTTON_PAUSE_TO_PLAY
+import com.maurodev.chronometer.utils.BUTTON_PLAY_TO_LOOP
 import com.maurodev.chronometer.utils.StringUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -11,8 +13,6 @@ import kotlinx.coroutines.withContext
 
 class MainViewModel : ViewModel(), ChronometerBehaviorInterface {
 
-    var flagButtonPlay = MutableLiveData<Boolean>()
-    var flagButtonPause = MutableLiveData<Boolean>()
     var currentTimeLong = MutableLiveData<Long>()
     val newLoops = MutableLiveData<MutableList<String>>()
 
@@ -43,14 +43,16 @@ class MainViewModel : ViewModel(), ChronometerBehaviorInterface {
         }
     }
 
-    override fun continueChronometer() {
+    override fun continueChronometer(buttonPlay: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             if (!flagChronometerValue) {
                 flagChronometerValue = true
                 chronometerTimer(time)
             }
             loops.add(StringUtils.formatTime(time))
-            newLoops.postValue(loops)
+            if (buttonPlay == BUTTON_PLAY_TO_LOOP) {
+                newLoops.postValue(loops)
+            }
         }
     }
 
@@ -77,20 +79,6 @@ class MainViewModel : ViewModel(), ChronometerBehaviorInterface {
                 currentTimeLong.postValue(time)
             }
         }
-    }
-
-    /**
-     * This function lives in the viewModel to maintain the state of the button.
-     */
-    fun setPlayFlagValue(flag: Boolean) {
-        flagButtonPlay.postValue(flag)
-    }
-
-    /**
-     * This function lives in the viewModel to maintain the state of the button.
-     */
-    fun setPauseFlagValue(flag: Boolean) {
-        flagButtonPause.postValue(flag)
     }
 
     companion object {

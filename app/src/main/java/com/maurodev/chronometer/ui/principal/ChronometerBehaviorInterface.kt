@@ -4,5 +4,5 @@ interface ChronometerBehaviorInterface {
     fun startChronometer()
     fun stopChronometer()
     fun pauseChronometer()
-    fun continueChronometer()
+    fun continueChronometer(buttonPlay: Int)
 }
