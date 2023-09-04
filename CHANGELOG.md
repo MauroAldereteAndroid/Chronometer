@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Fecha 20/09/03
+
+### Arreglado
+- Fix en el manejo de botones.
+
 ## Fecha 20/08/23
 
 ### Agregado
