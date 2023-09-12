@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,6 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var _binding: ActivityMainBinding
     private lateinit var _vm: MainViewModel
+    private lateinit var alertDialog: AlertDialogConfirm
 
     private val buttonStatus = ButtonStatus()
     private var time: Long? = null
@@ -37,6 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         behaviorButtons()
         observers()
+        alertDialog = AlertDialogConfirm(_binding.root.context)
     }
 
     /**
@@ -107,11 +111,7 @@ class MainActivity : AppCompatActivity() {
             buttonStatus.valuePlay = BUTTON_PLAY_TO_RESTART
             buttonStatus.valuePause = BUTTON_PAUSE_TO_LOOP
             buttonStatus.valueStop = BUTTON_STOP_TO_PLAY
-            Snackbar.make(_binding.root, "CONFIRM", Snackbar.LENGTH_SHORT).show()
-
-            /**
-             * TODO : modal de confirmacion y su implementacion.
-             */
+            alertDialog.show()
         }
     }
 }
